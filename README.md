@@ -14,7 +14,7 @@ npm install user-copilot-ui
 
 ```tsx
 import { CopilotProvider } from "user-copilot-ui";
-import "user-copilot-ui/dist/index.css";
+import "user-copilot-ui/dist/copilot-chat.css";
 
 <CopilotProvider>
   <App />
