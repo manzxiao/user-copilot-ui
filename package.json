@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "user-copilot-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -44,5 +44,8 @@
   "scripts": {
     "css": "npx postcss src/index.css -o dist/copilot-chat.css",
     "build": "vite build && npm run css"
+  },
+  "dependencies": {
+    "user-copilot-ui": "^1.0.0"
   }
 }
