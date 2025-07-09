@@ -14,7 +14,7 @@ npm install user-copilot-ui
 
 ```tsx
 import { CopilotProvider } from "user-copilot-ui";
-import "user-copilot-ui/dist/copilot-chat.css";
+import "user-copilot-ui/dist/index.css";
 
 <CopilotProvider>
   <App />
@@ -70,6 +70,53 @@ export const SearchFormCopilot = ({ form, onFinish, onClear }) => {
   - `name`: string，action 名称
   - `description`: string，action 描述
   - `parameters`: object，action 参数定义（JSON Schema 格式）
+  ```js
+  parameters: {
+            type: "object",
+            properties: {
+                smart_search: {type: "string", description: "Search by item number or name (can be a partial match)."},
+                item_line_build_status: {type: "string", enum: Object.values(ItemLineBuildStatusAJAXView), description: `Filter by item line build status. (e.g., one of ${Object.values(ItemLineBuildStatusAJAXView)}).`},
+                allergens_review_status: {type: "string", enum: Object.values(AllergensReviewedStatusAJAXView), description: "Filter by allergens review status (e.g., ALL, REVIEWED, null)."},
+                nutrition_review_status: {type: "string", enum: Object.values(NutritionReviewedStatusAJAXView), description: `Filter by nutrition review status (e.g., ${Object.values(NutritionReviewedStatusAJAXView).join(", ")}).`},
+                kitchen_location_ids: {type: "array", items: {type: "string"}, description: "Filter by kitchen location ID."},
+                item_statues: {type: "array", items: {type: "string"}, description: `Filter by item statuses.(e.g. ${Object.values(ItemStatusAJAXViewV3).join(", ")}).`},
+                orderable_status: {type: "string", enum: Object.values(ItemOrderableStatusAJAXView), description: `Filter by orderable status. e.g.${Object.values(ItemOrderableStatusAJAXView)}.`},
+                vendor_sku: {type: "string", description: "Filter by vendor_sku"},
+                version_status: {type: "string", enum: Object.values(ItemVersionStatusAJAXView), description: `Filter by version_status e.g. one of ${Object.values(ItemVersionStatusAJAXView).join(", ")}).`},
+                sold_status: {type: "array", items: {type: "string"}, description: `Filter by sold status. e.g.${Object.values(SoldStatusAJAXView)}.`},
+                concept_ids: {type: "array", items: {type: "string"}, description: "Filter by concept IDs."},
+                view_with_warnings: {type: "boolean", description: "Filter items with warnings."},
+                object_types: {
+                    type: "array",
+                    items: {
+                        type: "object",
+                        properties: {
+                            object_type: {type: "string", enum: Object.values(ItemObjectTypeAJAXView), description: `Filter by object_type.`},
+                            object_sub_type: {type: "string", enum: [...Object.values(ObjectSubTypeAJAXView), null], description: `Filter by object_sub_type..`},
+                        },
+                    },
+                    description: `Filter by object types.`,
+                },
+                attributes: {
+                    type: "array",
+                    items: {
+                        type: "object",
+                        properties: {
+                            attribute_id: {type: "string"},
+                            attribute_value_id: {type: "string"},
+                        },
+                    },
+                    description: `Filter by ${JSON.stringify(attributes)}. if user input attribute,pls help me find the attribute id, if user input attribute_value, pls help me find the attribute_value_id`,
+                },
+                validation_info_options_map: {
+                    type: "array",
+                    items: {type: "object"},
+                    description: `Filter by Missing info.`,
+                },
+            },
+            required: [],
+        },
+  ```
   - `handler`: function，action 处理函数
 
 ---
