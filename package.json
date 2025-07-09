@@ -10,8 +10,7 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.cjs.js"
     },
-    "./dist/index.css": "./dist/index.css",
-    "./dist/user-copilot-ui.css": "./dist/user-copilot-ui.css"
+    "./dist/index.css": "./dist/index.css"
   },
   "files": [
     "dist"
@@ -34,19 +33,15 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.6.0",
-    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.0.7",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.11",
+    "postcss-cli": "^11.0.1",
     "typescript": "^5.8.3",
     "vite": "^7.0.3",
-    "vite-plugin-dts": "^4.5.4",
-    "vite-plugin-libcss": "^1.1.2"
+    "vite-plugin-dts": "^4.5.4"
   },
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i ./src/index.css -o ./dist/user-copilot-ui.css --watch",
-    "build": "vite build && pnpm build:css"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.11"
+    "css": "npx postcss src/index.css -o dist/index.css",
+    "build": "vite build && npm run css"
   }
 }

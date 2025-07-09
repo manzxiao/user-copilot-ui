@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.ts",
-      name: "YourLib",
+      name: "UserCopilotUI",
       fileName: (format) => `index.${format}.js`,
       formats: ["es", "cjs"],
     },

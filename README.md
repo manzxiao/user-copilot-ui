@@ -14,7 +14,6 @@ A React component library for chat/copilot UI, built with Vite, TypeScript, and 
 pnpm add user-copilot-ui
 ```
 
-> 你需要在你的项目中自行配置 Tailwind CSS，否则组件样式无效。
 
 ## Tailwind CSS Setup
 

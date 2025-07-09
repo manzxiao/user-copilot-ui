@@ -50,24 +50,20 @@ export function Chat() {
   return (
     <>
       {/* 固定右下角的按钮和弹窗容器 */}
-      <div className="wonder-fixed wonder-bottom-6 wonder-right-6 wonder-z-50 wonder-flex wonder-flex-row wonder-items-end wonder-gap-4">
+      <div className="copilot-chat-fixed-container">
         {/* 聊天弹窗 */}
         {open && (
-          <div className="wonder-bg-white wonder-rounded-2xl wonder-shadow-2xl wonder-w-\[450px\] wonder-max-w-\[90vw\] wonder-flex wonder-flex-col wonder-h-\[70vh\] wonder-relative wonder-animate-fade-in">
-            <div className="wonder-px-6 wonder-pt-6 wonder-pb-2 wonder-text-lg wonder-font-semibold wonder-border-b wonder-border-gray-100">
-              Assistant
-            </div>
-            <div className="wonder-flex-1 wonder-overflow-y-auto wonder-overflow-x-hidden wonder-px-6 wonder-py-4 wonder-space-y-2 wonder-text-sm">
+          <div className="copilot-chat-modal">
+            <div className="copilot-chat-modal-header">Assistant</div>
+            <div className="copilot-chat-modal-messages">
               {messages.map((m, i) => (
                 <div
                   key={i}
-                  className={m.startsWith("User:") ? "wonder-text-right" : "wonder-text-left wonder-text-blue-700"}
+                  className={m.startsWith("User:") ? "copilot-chat-message-user" : "copilot-chat-message-ai"}
                 >
                   <span
                     className={
-                      m.startsWith("User:")
-                        ? "wonder-inline-block wonder-break-words wonder-max-w-full wonder-bg-gray-100 wonder-rounded-lg wonder-px-3 wonder-py-1"
-                        : "wonder-inline-block wonder-break-words wonder-max-w-full wonder-bg-blue-50 wonder-rounded-lg wonder-px-3 wonder-py-1"
+                      m.startsWith("User:") ? "copilot-chat-message-user-bubble" : "copilot-chat-message-ai-bubble"
                     }
                   >
                     {m.replace(/^User: /, "")}
@@ -76,7 +72,7 @@ export function Chat() {
               ))}
             </div>
             <form
-              className="wonder-flex wonder-items-center wonder-gap-2 wonder-px-6 wonder-py-4 wonder-border-t wonder-border-gray-100 wonder-bg-white"
+              className="copilot-chat-modal-form"
               onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
                 e.preventDefault();
                 if (!sending && input.trim()) send();
@@ -85,7 +81,7 @@ export function Chat() {
               <input
                 value={input}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
-                className="wonder-flex-1 wonder-px-3 wonder-py-2 wonder-border wonder-border-gray-200 wonder-rounded-lg wonder-focus:outline-none wonder-focus:ring-2 wonder-focus:ring-blue-400"
+                className="copilot-chat-modal-input"
                 placeholder="Type your question..."
                 disabled={sending}
                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -95,36 +91,25 @@ export function Chat() {
                   }
                 }}
               />
-              <button
-                type="submit"
-                className="wonder-px-4 wonder-py-2 wonder-bg-blue-600 wonder-text-white wonder-rounded-lg wonder-font-medium wonder-hover:bg-blue-700 wonder-transition wonder-disabled:opacity-60 wonder-disabled:cursor-not-allowed"
-                disabled={sending || !input.trim()}
-              >
+              <button type="submit" className="copilot-chat-modal-send-btn" disabled={sending || !input.trim()}>
                 {sending ? "Sending..." : "Send"}
               </button>
             </form>
-            <button
-              className="wonder-absolute wonder-top-3 wonder-right-3 wonder-text-gray-400 wonder-hover:text-gray-700 wonder-text-xl wonder-font-bold wonder-focus:outline-none"
-              onClick={() => setOpen(false)}
-              aria-label="Close"
-            >
+            <button className="copilot-chat-modal-close" onClick={() => setOpen(false)} aria-label="Close">
               ×
             </button>
           </div>
         )}
         {/* 浮动按钮始终显示 */}
         <button
-          className={
-            "wonder-bg-blue-600 wonder-hover:bg-blue-700 wonder-text-white wonder-rounded-full wonder-shadow-lg wonder-w-14 wonder-h-14 wonder-flex wonder-items-center wonder-justify-center wonder-text-2xl wonder-transition wonder-focus:outline-none wonder-border-4 " +
-            (open ? "wonder-border-blue-200" : "wonder-border-transparent")
-          }
+          className={"copilot-chat-fab " + (open ? "copilot-chat-fab-active" : "")}
           onClick={() => setOpen((o) => !o)}
           aria-label={open ? "Close Copilot Chat" : "Open Copilot Chat"}
           style={{ boxShadow: open ? "0 0 0 4px #3b82f6" : undefined }}
         >
           {open ? (
             <svg
-              className="wonder-w-7 wonder-h-7"
+              className="copilot-chat-fab-icon"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -134,7 +119,7 @@ export function Chat() {
             </svg>
           ) : (
             <svg
-              className="wonder-w-7 wonder-h-7"
+              className="copilot-chat-fab-icon"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
