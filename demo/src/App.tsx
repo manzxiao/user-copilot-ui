@@ -1,5 +1,4 @@
-import React from "react";
-import { CopilotProvider, Chat } from "user-copilot-ui";
+import { CopilotProvider } from "user-copilot-ui";
 import "user-copilot-ui/dist/copilot-chat.css";
 import { Demo } from "./Demo";
 
