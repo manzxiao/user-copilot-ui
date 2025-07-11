@@ -6,7 +6,7 @@ function App() {
   return (
     <CopilotProvider>
       <div style={{ minHeight: "100vh", background: "#f9fafb" }}>
-        <h1 style={{ textAlign: "center", marginTop: 40 }}>user-copilot-ui Demo</h1>
+        <h1 style={{ textAlign: "center", paddingTop: 40 }}>user-copilot-ui Demo</h1>
         <p style={{ textAlign: "center", color: "#666" }}>右下角浮动按钮可体验 Copilot 聊天</p>
 
         <Demo />
