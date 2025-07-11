@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "user-copilot-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -29,6 +29,14 @@
     "tailwind"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manzxiao/user-copilot-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manzxiao/user-copilot-ui/issues"
+  },
+  "homepage": "https://github.com/manzxiao/user-copilot-ui#readme",
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.11",
     "@types/react": "^18.3.23",
