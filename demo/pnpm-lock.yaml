@@ -15,8 +15,8 @@ importers:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
       user-copilot-ui:
-        specifier: ^1.0.3
-        version: 1.0.3(axios@1.10.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^1.0.5
+        version: 1.0.5(axios@1.10.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     devDependencies:
       '@eslint/js':
         specifier: ^9.30.1
@@ -1149,8 +1149,8 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
-  user-copilot-ui@1.0.3:
-    resolution: {integrity: sha512-xCNAdfbpl4oislSomHowcPzs1/VmFg0ISvv6LPwcynKe0PbqTRAaYoJiVNjagXo3EIYDUmyjG+xt/07PKDYbxQ==}
+  user-copilot-ui@1.0.5:
+    resolution: {integrity: sha512-yfPBClYvo4zJYLGgmLRlCdW2z19psoRejvWsIn1MsZiawqmJ+w7dTbW5tSzIevG6jAB8tUtTtHk1pHipBmKc1w==}
     peerDependencies:
       axios: ^1.10.0
       react: '>=17.0.0'
@@ -2260,7 +2260,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  user-copilot-ui@1.0.3(axios@1.10.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  user-copilot-ui@1.0.5(axios@1.10.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       axios: 1.10.0
       react: 19.1.0
