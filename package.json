@@ -50,9 +50,8 @@
   },
   "scripts": {
     "css": "npx postcss src/index.css -o dist/copilot-chat.css",
-    "build": "vite build && npm run css"
-  },
-  "dependencies": {
-    "user-copilot-ui": "^1.0.4"
+    "build": "vite build && npm run css",
+    "dev:rebuild": "./dev-script.sh",
+    "dev:watch": "./watch-dev.sh"
   }
 }

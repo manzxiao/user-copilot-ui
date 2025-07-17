@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 
 // Readable
 const ReadableContext = createContext<any[]>([]);
@@ -7,9 +7,14 @@ const SetReadableContext = createContext<any>(() => {});
 export function useCopilotReadable({ description, value }: { description: string; value: any }) {
   const setReadables = useContext(SetReadableContext);
   useEffect(() => {
-    setReadables((prev: any[]) => [...prev, { description, value }]);
-    return () => setReadables((prev: any[]) => prev.filter((r) => r.value !== value));
-  }, [description, value]);
+    setReadables((prev: any[]) => {
+      // 移除同描述的旧 readable
+      const filtered = prev.filter((r) => r.description !== description);
+      // 添加新的 readable
+      return [...filtered, { description, value }];
+    });
+    return () => setReadables((prev: any[]) => prev.filter((r) => r.description !== description));
+  }, [description, JSON.stringify(value)]); // 使用 JSON.stringify 来比较值的变化
 }
 
 // Action
@@ -18,10 +23,24 @@ const SetActionContext = createContext<any>(() => {});
 
 export function useCopilotAction(action: any) {
   const setActions = useContext(SetActionContext);
+  const actionRef = useRef(action);
+
+  // 更新 ref 以保持最新的 action
+  actionRef.current = action;
+
   useEffect(() => {
-    setActions((prev: any[]) => [...prev, action]);
-    return () => setActions((prev: any[]) => prev.filter((a) => a !== action));
-  }, [action]);
+    const currentAction = actionRef.current;
+    setActions((prev: any[]) => {
+      // 移除同名的旧 action
+      const filtered = prev.filter((a) => a.name !== currentAction.name);
+      // 添加新的 action
+      return [...filtered, currentAction];
+    });
+
+    return () => {
+      setActions((prev: any[]) => prev.filter((a) => a.name !== currentAction.name));
+    };
+  }, [action.name]); // 只依赖 action.name，这样更稳定
 }
 
 // Provider
