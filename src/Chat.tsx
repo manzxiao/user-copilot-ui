@@ -241,7 +241,6 @@ export function Chat() {
                         }
                       }
                       return;
-                      break;
 
                     case "complete":
                       // 完成流式响应
@@ -261,7 +260,6 @@ export function Chat() {
                         },
                       ]);
                       return;
-                      break;
                   }
                 } catch (parseError) {
                   console.error("解析SSE数据失败:", parseError);
