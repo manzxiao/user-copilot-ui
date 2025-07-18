@@ -12,12 +12,13 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "axios"],
+      external: ["react", "react-dom", "axios", "react/jsx-runtime"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
           axios: "axios",
+          "react/jsx-runtime": "jsxRuntime",
         },
       },
     },
