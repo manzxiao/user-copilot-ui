@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "user-copilot-ui",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",

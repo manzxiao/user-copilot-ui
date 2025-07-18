@@ -21,7 +21,7 @@ export function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [open, setOpen] = useState(false);
   const [sending, setSending] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(30); // 打字速度 (ms)
+  const typingSpeed = 25; // 固定打字速度 (ms)
   const readables = useAllReadables();
   const actions = useAllActions();
   const syncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -304,21 +304,7 @@ export function Chat() {
         {/* 聊天弹窗 */}
         {open && (
           <div className="copilot-chat-modal">
-            <div className="copilot-chat-modal-header">
-              Assistant
-              <div className="typing-speed-control">
-                <label>打字速度:</label>
-                <input
-                  type="range"
-                  min="10"
-                  max="100"
-                  value={typingSpeed}
-                  onChange={(e) => setTypingSpeed(Number(e.target.value))}
-                  className="typing-speed-slider"
-                />
-                <span>{typingSpeed}ms</span>
-              </div>
-            </div>
+            <div className="copilot-chat-modal-header">Assistant</div>
             <div className="copilot-chat-modal-messages">
               {messages.map((message) => (
                 <div
@@ -358,7 +344,7 @@ export function Chat() {
                 value={input}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
                 className="copilot-chat-modal-input"
-                placeholder="Type your question..."
+                placeholder="How can I help you today?"
                 disabled={sending}
                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                   if (e.key === "Enter" && !e.shiftKey) {
