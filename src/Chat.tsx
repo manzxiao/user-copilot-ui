@@ -15,9 +15,12 @@ export function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [open, setOpen] = useState(false);
   const [sending, setSending] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(30); // 打字速度 (ms)
   const readables = useAllReadables();
   const actions = useAllActions();
   const syncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const typingQueueRef = useRef<string[]>([]);
+  const isTypingRef = useRef(false);
 
   // 同步 readable/action 到后端 - 使用防抖避免频繁请求
   useEffect(() => {
@@ -42,6 +45,30 @@ export function Chat() {
       }
     };
   }, [readables, actions]);
+
+  // 打字机效果处理函数
+  const processTypingQueue = React.useCallback(
+    async (messageId: string) => {
+      if (isTypingRef.current || typingQueueRef.current.length === 0) return;
+
+      isTypingRef.current = true;
+
+      while (typingQueueRef.current.length > 0) {
+        const chunk = typingQueueRef.current.shift();
+        if (chunk) {
+          setMessages((msgs) =>
+            msgs.map((msg) => (msg.id === messageId ? { ...msg, content: msg.content + chunk } : msg))
+          );
+
+          // 等待打字间隔
+          await new Promise((resolve) => setTimeout(resolve, typingSpeed + Math.random() * 20));
+        }
+      }
+
+      isTypingRef.current = false;
+    },
+    [typingSpeed]
+  );
 
   // action handler map
   const actionMap = React.useMemo(() => {
@@ -146,12 +173,9 @@ export function Chat() {
                         ]);
                         isFirstContent = false;
                       } else {
-                        // 更新流式内容
-                        setMessages((msgs) =>
-                          msgs.map((msg) =>
-                            msg.id === aiMessageId ? { ...msg, content: msg.content + parsed.content } : msg
-                          )
-                        );
+                        // 高级打字机效果：将内容加入队列
+                        typingQueueRef.current.push(parsed.content);
+                        processTypingQueue(aiMessageId);
                       }
                       break;
 
@@ -276,7 +300,21 @@ export function Chat() {
         {/* 聊天弹窗 */}
         {open && (
           <div className="copilot-chat-modal">
-            <div className="copilot-chat-modal-header">Assistant 2</div>
+            <div className="copilot-chat-modal-header">
+              Assistant
+              <div className="typing-speed-control">
+                <label>打字速度:</label>
+                <input
+                  type="range"
+                  min="10"
+                  max="100"
+                  value={typingSpeed}
+                  onChange={(e) => setTypingSpeed(Number(e.target.value))}
+                  className="typing-speed-slider"
+                />
+                <span>{typingSpeed}ms</span>
+              </div>
+            </div>
             <div className="copilot-chat-modal-messages">
               {messages.map((message) => (
                 <div

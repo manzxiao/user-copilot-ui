@@ -30,6 +30,51 @@
   font-size: 1.125rem;
   font-weight: 600;
   border-bottom: 1px solid #f3f4f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.typing-speed-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.typing-speed-control label {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.typing-speed-slider {
+  width: 80px;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.typing-speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.typing-speed-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
 }
 .copilot-chat-modal-messages {
   flex: 1;
@@ -141,4 +186,76 @@
 .copilot-chat-fab-icon {
   width: 28px;
   height: 28px;
+}
+
+/* 打字机效果样式 */
+.copilot-chat-message-ai-bubble {
+  display: inline-block;
+  word-break: break-all;
+  max-width: 100%;
+  background: #eff6ff;
+  border-radius: 0.5rem;
+  padding: 8px 12px; /* 增加内边距避免文字贴边 */
+  position: relative;
+  line-height: 1.4; /* 增加行高改善可读性 */
+}
+
+/* 打字机光标动画 */
+@keyframes typewriter-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.streaming-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: #3b82f6;
+  margin-left: 2px;
+  animation: typewriter-cursor 1s infinite;
+  vertical-align: middle;
+}
+
+/* 打字机文字出现动画 */
+@keyframes typewriter-text {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.copilot-chat-message-ai-bubble {
+  animation: typewriter-text 0.1s ease-out;
+}
+
+/* thinking 状态样式 */
+.copilot-chat-message-thinking {
+  text-align: left;
+  color: #6b7280;
+}
+
+.copilot-chat-message-thinking-bubble {
+  display: inline-block;
+  word-break: break-all;
+  max-width: 100%;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 4px 12px 4px 16px; /* 增加左边距避免与边框重叠 */
+  border-left: 3px solid #3b82f6;
+  position: relative;
+}
+
+.thinking-indicator {
+  display: inline-block;
+  animation: thinking-pulse 1.5s ease-in-out infinite;
+  margin-right: 4px; /* 给思考图标添加右边距 */
+}
+
+@keyframes thinking-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
