@@ -3,6 +3,12 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useAllReadables, useAllActions } from "./copilotContext";
 
+// API配置
+const API_BASE_URL =
+  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:3001"
+    : "https://user-copilot-server-production.up.railway.app";
+
 interface Message {
   id: string;
   type: "user" | "ai" | "thinking";
@@ -34,7 +40,7 @@ export function Chat() {
       // 设置新的定时器，延迟 100ms 发送
       syncTimeoutRef.current = setTimeout(() => {
         console.log("Syncing data:", { readables, actions });
-        axios.post("http://localhost:3001/sync", { readables, actions });
+        axios.post(`${API_BASE_URL}/sync`, { readables, actions });
       }, 100);
     }
 
@@ -108,7 +114,7 @@ export function Chat() {
 
     try {
       // 使用 fetch 进行 SSE 连接
-      const response = await fetch(`http://localhost:3001/chat-stream`, {
+      const response = await fetch(`${API_BASE_URL}/chat-stream`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -218,7 +224,7 @@ export function Chat() {
                           ]);
 
                           // 反馈结果给后端
-                          await axios.post("http://localhost:3001/action-result", {
+                          await axios.post(`${API_BASE_URL}/action-result`, {
                             name,
                             args: parsedArgs,
                             result,
