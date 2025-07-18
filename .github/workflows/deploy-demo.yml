@@ -22,8 +22,16 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: Clear pnpm cache
+        run: |
+          pnpm store prune
+          pnpm store prune --force
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile --prefer-offline=false
+
+      - name: Check installed version
+        run: pnpm list user-copilot-ui
 
       - name: Build demo
         run: pnpm run build
