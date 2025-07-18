@@ -15,8 +15,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       user-copilot-ui:
-        specifier: file:..
-        version: file:..(axios@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: latest
+        version: 1.0.7(axios@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@eslint/js':
         specifier: ^9.30.1
@@ -1149,8 +1149,8 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
-  user-copilot-ui@file:..:
-    resolution: {directory: .., type: directory}
+  user-copilot-ui@1.0.7:
+    resolution: {integrity: sha512-PSOxKX8+WfZn5SNLvEK8EJLU8kPJlDM35UTPu5KsnXgAguZonoS2WBQEAZok09cWO9Fbb4b3fuBlL0lLK2nNBA==}
     peerDependencies:
       axios: ^1.10.0
       react: '>=17.0.0'
@@ -2267,7 +2267,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  user-copilot-ui@file:..(axios@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  user-copilot-ui@1.0.7(axios@1.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       axios: 1.10.0
       react: 18.3.1
